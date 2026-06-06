@@ -3,7 +3,7 @@
 set -e
 
 # Move to project root
-SCRIPT_PATH=$(dirname `which $0`)
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd $SCRIPT_PATH/../
 
 # Make sure all deps are installed
