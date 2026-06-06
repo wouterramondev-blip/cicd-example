@@ -1,15 +1,16 @@
 #!/bin/bash
-
 set -e
 
-# Move to project root
-SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-cd $SCRIPT_PATH/../
+# Robust way to find project root
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd "$SCRIPT_DIR/../"
 
-# Make sure all deps are installed
+echo "Running tests in $(pwd)"
+
+# Install dependencies
 python -m pip install -r .ci/requirements.txt --quiet
 python -m pip install -r requirements.txt --quiet
 
-# Run linting and tests
+# Run linting + tests
 flake8 app/
-pytest
+pytest --verbose
